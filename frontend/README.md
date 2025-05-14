@@ -1,47 +1,102 @@
-# SYDNEY EVENTS EXPLORER DOCUMENTATION
+# SYDNEY EVENTS EXPLORER
 
-=== PROJECT STRUCTURE ===
+🔗 Live Links
+Frontend: https://event-scraper-csbd-ltt85r4lb-nigamidea-gmailcoms-projects.vercel.app/
+
+Backend API: https://event-scraper-760g.onrender.com
+
+## 📦 Project Structure
 backend/
-├── scraper.js       # Puppeteer scraping logic
-├── server.js        # Express API (port 3001)
-└── package.json
+├── scraper.js # Puppeteer scraping logic (with cloud deployment fixes)
+├── server.js # Express API (port 3001)
+└── package.json # Includes @sparticuz/chromium for Render compatibility
 
 frontend/
 ├── src/
-│   ├── App.jsx      # Main UI component
-│   ├── main.jsx     # Vite entry point
-│   └── index.css    # Tailwind imports
-├── tailwind.config.js
-├── vite.config.js
+│ ├── App.jsx # Connected to live API with fallback mock data
+│ ├── main.jsx # Vite entry point
+│ └── index.css # Tailwind imports
+├── .env # VITE_API_URL configured for production
 └── package.json
 
-=== INSTALLATION ===
-1. BACKEND:
-   cd backend
-   npm install
-   node server.js
 
-2. FRONTEND:
-   cd frontend
-   npm install
-   npm run dev
+## 🚀 Installation
+```bash
+# Backend (requires Node.js 18+)
+cd backend
+npm install
+node server.js  # API runs on http://localhost:3001
 
-=== TECHNICAL SPECS ===
-- React 18 + Vite
-- Tailwind CSS 4.1
-- Express 4.x
-- Puppeteer 22.x
+# Frontend
+cd frontend
+npm install
+npm run dev  # App runs on http://localhost:5173
 
-=== KEY FEATURES ===
-1. Apple-inspired UI:
-   - 1d1d1f (Black)
-   - f5f5f7 (Light Gray)
-   - 86868b (Text Gray)
+🌟 Achieved Features:
 
-2. Responsive Components:
-   - Mobile: 1 column
-   - Desktop: 2 columns
+Feature	Status	Notes
+Live Event Scraping	✅ Partial	Works locally, cloud deployment requires Render Pro tier
+Responsive UI	      ✅ Complete	Tailwind-powered mobile/desktop views
+Email Validation	   ✅ Complete	Regex validation with disabled states
+API Integration	   ✅ Complete	Falls back to mock data if API fails
+Deployment	         ⚠️ Partial	Frontend on Vercel, backend on Render (free tier limitations)
 
-3. Email Validation:
-   - Requires @ symbol
-   - Disables submit button when invalid
+⚠️ Known Limitations
+Render Free Tier Constraints:
+
+Puppeteer requires Pro tier for reliable Chromium execution
+
+Backend sleeps after inactivity (50s+ cold starts)
+
+Scraper Fallback Behavior:
+
+javascript"
+// Currently returns mock data if scraping fails
+return events.length > 0 ? events : mockData;
+Environment Variables:
+
+Requires manual setup for:
+
+VITE_API_URL (Frontend)
+
+PUPPETEER_EXECUTABLE_PATH (Backend)
+
+🔧 Technical Stack
+Component	Technology	Version
+Frontend	React + Vite	18.x
+Styling	Tailwind CSS	4.1
+Backend	Express.js	4.x
+Scraping	Puppeteer	22.x (+stealth plugin)
+
+🎨 UI Specifications
+color-palette
+Primary: #1d1d1f (Apple Black)
+Secondary: #f5f5f7 (Light Gray)
+Text: #86868b (Gray)
+
+📝 Submission Notes
+What Works:
+
+Full frontend functionality with mock data
+
+Backend API structure ready for scaling
+
+Responsive design across devices
+
+Areas for Improvement:
+
+Upgrade Render tier for consistent scraping
+
+Add MongoDB for event persistence
+
+Implement retry logic for failed scrapes
+
+Key Learnings:
+
+Cloud deployment challenges with Puppeteer
+
+Importance of fallback mechanisms
+
+Environment variable management
+
+
